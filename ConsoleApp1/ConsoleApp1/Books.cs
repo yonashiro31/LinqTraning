@@ -27,10 +27,10 @@ namespace ConsoleApp1
             // 教本問題②
             // ワンダフル（略の価格とページ数を表示
             var wanderDate = books.Where(item => item.Title == "ワンダフルC#ライフ").ToList();
-            Console.WriteLine("ワンダフルの価格とページ数：" + wanderDate[0].Price + " "  +wanderDate[0].Pages );
+            Console.WriteLine("【ワンダフルの価格とページ数】：" + wanderDate[0].Price + " "  +wanderDate[0].Pages );
             // C＃が含まれている冊数をカウント
             var csCount = books.Count(item => item.Title.Contains("C#"));
-            Console.WriteLine("C#が含まれている冊数" + csCount);
+            Console.WriteLine("【C#が含まれている冊数】" + csCount);
             // C#が含まれている本の平均ページ
             var csBooks = books.Where(item => item.Title.Contains("C#")).Average(item => item.Pages);
 
@@ -51,8 +51,16 @@ namespace ConsoleApp1
             }
             var aaaa = num / num2;
             // 価格が400以上で最初に見つかった書籍のタイトルを表示
-          
 
+            var over400Book = books.FirstOrDefault(item => item.Price >400);
+            Console.WriteLine(over400Book.Title);
+            // 価格4000以下で最大のページ数を求めるコード
+            var bookk = books.FindAll(item => item.Price <= 4000).OrderByDescending(item => item.Pages).First();
+            Console.WriteLine("【4000以下最大ページ数】" + bookk.Pages);
+            // C#が含まれていてかつ5000ページ以下の本のタイトル表示
+            var cs5000Books = books.FindAll(book => book.Title.Contains("C#")).FindAll(book => book.Pages <= 5000);
+            Console.WriteLine("【5000以下かつC#が含まれている本】");
+            cs5000Books.ForEach(book => Console.WriteLine(book.Title));
         }
        
 
